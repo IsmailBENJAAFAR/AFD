@@ -1,0 +1,13 @@
+2,4,1
+a,b
+q1,q2,q3,q4
+q4
+q1
+q1,a,q2
+q1,b,q1
+q2,a,q2
+q2,b,q3
+q3,a,q2
+q3,b,q4
+q4,a,q2
+q4,b,q1
