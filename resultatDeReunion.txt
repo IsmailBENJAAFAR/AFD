@@ -1,0 +1,13 @@
+2,4,1
+0,1
+A-X,A-Y,B-X,B-Y
+B-Y
+A-X
+A-X,0,A-X
+A-X,1,B-Y
+A-Y,0,A-X
+A-Y,1,B-Y
+B-X,0,B-X
+B-X,1,B-Y
+B-Y,0,B-X
+B-Y,1,B-Y

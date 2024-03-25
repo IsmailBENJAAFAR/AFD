@@ -549,34 +549,6 @@ public class Automate{
             Automate differenceAutomate = a1.difference(a2);
             Automate complementaire = a1.complement();
 
-            /*System.out.println("Alphabet du nouvel automate : ");
-            for (String symbole : produitAutomate.x) {
-                System.out.print(symbole + " ");
-            }
-            System.out.println();
-
-            System.out.println("Etats du nouvel automate : ");
-            for (String etat : produitAutomate.q) {
-                System.out.print(etat + " ");
-            }
-            System.out.println();
-
-            System.out.println("Etat initial du nouvel automate : " + produitAutomate.qi);
-
-            System.out.println("Etats finaux du nouvel automate : ");
-            for (String etatFinal : produitAutomate.f) {
-                System.out.print(etatFinal + " ");
-            }
-            System.out.println();
-
-            System.out.println("Fonction de transition du nouvel automate : ");
-            for (String etat : produitAutomate.q) {
-                for (String symbole : produitAutomate.x) {
-                    String transition = produitAutomate.Delta(etat, symbole);
-                    System.out.println(etat + "," + symbole + "," + transition);
-                }
-            }*/
-
         } catch (IOException e) {
             System.out.println(e);
         }
