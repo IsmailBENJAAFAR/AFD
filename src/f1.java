@@ -306,7 +306,10 @@ public class f1 extends javax.swing.JFrame {
         StringBuilder s = a.printAutomate();
         boolean b=false;
         b=a.verif(a.qi,t1.getText());
-        System.out.println(a.accepteLangageVide());
+        //
+        System.out.println("Accepte le langage vide:"+a.accepteLangageVide());
+        System.out.println("Accepte le langage acceptee est fini:"+a.accepteLangageFini());
+        //
         s.append("\n");
         s.append("\n");
         s.append("\n");
@@ -316,7 +319,7 @@ public class f1 extends javax.swing.JFrame {
             l.setText("mots accepté");
         else
             l.setText("mots non accepté");
-       
+
         }
      catch (IOException e)
      {

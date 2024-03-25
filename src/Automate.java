@@ -16,6 +16,8 @@
  * *****************************************************
  * fin fichier
  */
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.*;
 import java.util.*;
 public class Automate{
@@ -180,6 +182,23 @@ public class Automate{
         for (int j = 0; j < etatsFinaux.size(); j++) {
             if (etatsAccessible.contains(etatsFinaux.get(j))){
                 return false;
+            }
+        }
+        return true;
+    }
+    public boolean accepteLangageFini(){
+        int n = q.length;
+        for (int i = n; i < ((2*n)-1); i++) {
+            int n1 = (int) Math.pow(2,i);
+            for (int j = 0; j < n1; j++) {
+                String mot = StringUtils.leftPad(Integer.toBinaryString(j), i, '0');
+                StringBuilder w = new StringBuilder();
+                for (int k = 0; k < mot.length(); k++) {
+                    w.append(x[Integer.parseInt(String.valueOf(mot.charAt(k)))]);
+                }
+                if(verif(qi, String.valueOf(w))){
+                    return false;
+                }
             }
         }
         return true;
