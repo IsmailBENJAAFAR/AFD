@@ -163,39 +163,26 @@ public class Automate{
         }
         return result;
     }
+    public boolean accepteLangageVide() throws IOException {
+        ArrayList<String> etatsAccessible = new ArrayList<>(List.of(qi));
+        int i = 0;
+        while (i<etatsAccessible.size()){
+            for (int j = 0; j < etatsAccessible.size(); j++) {
+                for (int k = 0; k < x.length; k++) {
+                    if (!etatsAccessible.contains(Delta(etatsAccessible.get(i),x[k]))){
+                        etatsAccessible.add(Delta(etatsAccessible.get(i),x[k]));
+                    }
+                }
+            }
+            i++;
+        }
+        ArrayList<String> etatsFinaux = new ArrayList<>(List.of(f));
+        for (int j = 0; j < etatsFinaux.size(); j++) {
+            if (etatsAccessible.contains(etatsFinaux.get(j))){
+                return false;
+            }
+        }
+        return true;
+    }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-/*class test{
- public static void main(String []args)
-    {
-         Scanner s=new Scanner(System.in);
-     try{
-        Automate a;
-        a=new Automate("f.txt");
-        boolean b=false;
-        System.out.println("donner une chaine");
-        String ch=s.next();
-        b=a.verif(a.qi,ch);
-        if(b)
-            System.out.println(ch+" est acceptée");
-        else
-            System.out.println(ch+" n'est pas acceptée");
-  
-        }
-     catch (IOException e)
-     {
-         System.out.println(e);
-     }
-    }
-}*/

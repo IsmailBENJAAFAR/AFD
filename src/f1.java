@@ -306,6 +306,7 @@ public class f1 extends javax.swing.JFrame {
         StringBuilder s = a.printAutomate();
         boolean b=false;
         b=a.verif(a.qi,t1.getText());
+        System.out.println(a.accepteLangageVide());
         s.append("\n");
         s.append("\n");
         s.append("\n");
