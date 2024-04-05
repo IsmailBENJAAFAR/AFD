@@ -249,17 +249,15 @@ public class Automate{
      * d'états finaux de chaque automate. Elle élimine les doublons et retourne un tableau contenant
      * les états finaux combinés.
      */
-    private String[] produitEtatsFinaux(String[] etatsFinaux1, String[] etatsFinaux2) {
+    private String[] produitEtatsFinaux(String[] etatQ1,String[] etatsFinaux1,String[] etatQ2, String[] etatsFinaux2) {
         // Création d'une liste pour stocker les nouveaux états combinés
         List<String> nouveauxEtats = new ArrayList<>();
-        // Parcours de tous les états de chaque automate et création des combinaisons
-        for (String etat1 : etatsFinaux1) {
-            for (String etat2 : etatsFinaux2) {
-                // Ajout de la combinaison d'états à la liste des nouveaux états
-                nouveauxEtats.add(etat1 + "-" + etat2);
-            }
-        }
-        // Conversion de la liste en tableau et retour du résultat
+        //combiner etats F1xQ2
+        String[] f1Q2 = combinerEtats(etatsFinaux1,etatQ2);
+        //combiner etats Q1xF2
+        String[] q1F2 = combinerEtats(etatQ1,etatsFinaux2);
+        nouveauxEtats.addAll(List.of(f1Q2));
+        nouveauxEtats.addAll(List.of(q1F2));
         return nouveauxEtats.toArray(new String[0]);
     }
 
@@ -268,7 +266,7 @@ public class Automate{
             String[] nouvelAlphabet = fusionnerAlphabet(this.x, a2.x);
             String[] nouveauxEtats = combinerEtats(this.q, a2.q);
             String nouvelEtatInitial = this.qi + "-" + a2.qi;
-            String[] nouveauxEtatsFinaux = produitEtatsFinaux(this.f, a2.f);
+            String[] nouveauxEtatsFinaux = produitEtatsFinaux(this.q,this.f,a2.q, a2.f);
 
             // Construction de la nouvelle fonction de transition
             List<String> nouvelleFonctionTransition = new ArrayList<>();
@@ -332,7 +330,7 @@ public class Automate{
             String nouvelEtatInitial = this.qi +"-"+ a2.qi;
 
             // Fusion des états finaux
-            String[] nouveauxEtatsFinaux = intersectionEtatsFinaux(this.q,this.f,a2.q, a2.f);
+            String[] nouveauxEtatsFinaux = intersectionEtatsFinaux(this.f, a2.f);
 
             // Construction de la nouvelle fonction de transition
             List<String> nouvelleFonctionTransition = new ArrayList<>();
@@ -384,18 +382,19 @@ public class Automate{
     }
 
     // Fusionne les états finaux des deux automates
-    private String[] intersectionEtatsFinaux(String[] etatQ1,String[] etatsFinaux1,String[] etatQ2, String[] etatsFinaux2) {
+    private String[] intersectionEtatsFinaux(String[] etatsFinaux1, String[] etatsFinaux2) {
         // Création d'une liste pour stocker les nouveaux états combinés
         List<String> nouveauxEtats = new ArrayList<>();
-        //combiner etats F1xQ2
-        String[] f1Q2 = combinerEtats(etatsFinaux1,etatQ2);
-        //combiner etats Q1xF2
-        String[] q1F2 = combinerEtats(etatQ1,etatsFinaux2);
-        nouveauxEtats.addAll(List.of(f1Q2));
-        nouveauxEtats.addAll(List.of(q1F2));
+        // Parcours de tous les états de chaque automate et création des combinaisons
+        for (String etat1 : etatsFinaux1) {
+            for (String etat2 : etatsFinaux2) {
+                // Ajout de la combinaison d'états à la liste des nouveaux états
+                nouveauxEtats.add(etat1 + "-" + etat2);
+            }
+        }
+        // Conversion de la liste en tableau et retour du résultat
         return nouveauxEtats.toArray(new String[0]);
     }
-
     // Opération de différence de deux automates
     public Automate difference(Automate a2) {
         try {
@@ -483,7 +482,6 @@ public class Automate{
         return nouveauxEtats.toArray(new String[0]);
     }
 
-    // Opération de complémentaire de l'automate
     // Opération de complémentaire de l'automate
     public Automate complement() {
         try {
