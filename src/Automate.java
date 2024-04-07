@@ -19,6 +19,7 @@
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.*;
 public class Automate{
     String nomfich;//nom du fichier
@@ -485,12 +486,12 @@ public class Automate{
     // Opération de complémentaire de l'automate
     public Automate complement() {
         try {
-            // Calcul de l'ensemble des états non finaux
-            Set<String> etatsNonFinaux = new HashSet<>(Arrays.asList(this.q));
-            etatsNonFinaux.removeAll(Arrays.asList(this.f));
 
             // Création de l'automate complémentaire avec les mêmes paramètres que l'automate d'origine
             Automate complementaire = new Automate(this.nomfich);
+            // Calcul de l'ensemble des états finaux
+            Set<String> etatsNonFinaux = new HashSet<>(Arrays.asList(this.q));
+            etatsNonFinaux.removeAll(Arrays.asList(this.f));
             complementaire.f = etatsNonFinaux.toArray(new String[0]);
 
             // Calcul de la fonction de transition pour l'automate complémentaire
@@ -498,8 +499,7 @@ public class Automate{
             for (String etat : this.q) {
                 for (String symbole : this.x) {
                     String nouvelEtat = this.Delta(etat, symbole);
-                    // Si l'état nouvelEtat n'est pas dans l'ensemble des états finaux, alors il est ajouté
-                    if (!Arrays.asList(this.f).contains(nouvelEtat)) {
+                    if (!nouvelleFonctionTransition.contains(etat + "," + symbole + "," + nouvelEtat)) {
                         nouvelleFonctionTransition.add(etat + "," + symbole + "," + nouvelEtat);
                     }
                 }
@@ -510,15 +510,27 @@ public class Automate{
             BufferedWriter writer = new BufferedWriter(new FileWriter(nomNouveauFichier));
 
             // Écriture des informations de l'automate complémentaire dans le fichier
-            writer.write(this.x.length + "," + this.q.length + "," + complementaire.f.length + "\n");
-            for (String symbole : this.x)
-                writer.write(symbole + ",");
+            writer.write(complementaire.x.length + "," + complementaire.q.length + "," + (complementaire.q.length-complementaire.f.length) + "\n");
+            for (int i = 0; i < complementaire.x.length; i++) {
+                writer.write(complementaire.x[i]);
+                if(i+1<complementaire.x.length){
+                    writer.write(",");
+                }
+            }
             writer.write("\n");
-            for (String etat : this.q)
-                writer.write(etat + ",");
+            for (int i = 0; i < complementaire.q.length; i++) {
+                writer.write(complementaire.q[i]);
+                if(i+1<complementaire.q.length){
+                    writer.write(",");
+                }
+            }
             writer.write("\n");
-            for (String etatFinal : complementaire.f)
-                writer.write(etatFinal + ",");
+            for (int i = 0; i < complementaire.f.length; i++) {
+                writer.write(complementaire.f[i]);
+                if(i+1<complementaire.f.length){
+                    writer.write(",");
+                }
+            }
             writer.write("\n");
             writer.write(this.qi + "\n");
             for (String transition : nouvelleFonctionTransition)
