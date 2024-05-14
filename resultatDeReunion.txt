@@ -1,7 +1,7 @@
 2,4,4
 0,1
 A-X,A-Y,B-X,B-Y
-B-X,B-Y,A-Y,B-Y
+A-X,A-Y,A-Y,B-Y
 A-X
 A-X,0,A-X
 A-X,1,B-Y

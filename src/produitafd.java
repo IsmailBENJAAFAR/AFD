@@ -3,6 +3,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import java.io.IOException;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -14,6 +15,9 @@ import javax.swing.UIManager;
  * @author DestroHaxs
  */
 public class produitafd extends javax.swing.JFrame {
+
+    private String fichierAutomate1;
+    private String fichierAutomate2;
 
     /**
      * Creates new form produitafd
@@ -79,7 +83,11 @@ public class produitafd extends javax.swing.JFrame {
         jButton1.setText("Generer");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                try {
+                    jButton1ActionPerformed(evt);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -198,9 +206,9 @@ public class produitafd extends javax.swing.JFrame {
         JFileChooser chooser = new JFileChooser();
         int returnVal = chooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            String filePath = chooser.getSelectedFile().getAbsolutePath();
-            jTextField3.setText(filePath);
-        }    }//GEN-LAST:event_jMenuItem2ActionPerformed
+            fichierAutomate2 = chooser.getSelectedFile().getAbsolutePath();
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // Fermer l'interface graphique actuelle (produitafd)
@@ -216,8 +224,7 @@ public class produitafd extends javax.swing.JFrame {
         JFileChooser chooser = new JFileChooser();
         int returnVal = chooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            String filePath = chooser.getSelectedFile().getAbsolutePath();
-            jTextField2.setText(filePath);
+            fichierAutomate1 = chooser.getSelectedFile().getAbsolutePath();
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -225,8 +232,28 @@ public class produitafd extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int i = 0 ;
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_jButton1ActionPerformed
+        if (jCheckBox1.isSelected()){
+            Automate automate1 = new Automate(fichierAutomate1);
+            Automate automate2 = new Automate(fichierAutomate2);
+            Automate result = automate1.reunion(automate2);
+        }
+
+        else if (jCheckBox2.isSelected()){
+            Automate automate1 = new Automate(fichierAutomate1);
+            Automate automate2 = new Automate(fichierAutomate2);
+            Automate result = automate1.intersection(automate2);
+        }
+        else if (jCheckBox3.isSelected()){
+            Automate automate1 = new Automate(fichierAutomate1);
+            Automate automate2 = new Automate(fichierAutomate2);
+            Automate result = automate1.difference(automate2);
+        }
+
+        else if (jCheckBox4.isSelected()){
+            Automate automate1 = new Automate("complementaire_"+fichierAutomate1);
+            Automate result = automate1.complement();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed

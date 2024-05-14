@@ -488,7 +488,7 @@ public class Automate{
         try {
 
             // Création de l'automate complémentaire avec les mêmes paramètres que l'automate d'origine
-            Automate complementaire = new Automate(this.nomfich);
+            Automate complementaire = new Automate("complementaire_"+this.nomfich);
             // Calcul de l'ensemble des états finaux
             Set<String> etatsNonFinaux = new HashSet<>(Arrays.asList(this.q));
             etatsNonFinaux.removeAll(Arrays.asList(this.f));
