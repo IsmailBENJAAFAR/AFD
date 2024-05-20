@@ -306,12 +306,14 @@ public class f1 extends javax.swing.JFrame {
         StringBuilder s = a.printAutomate();
         boolean b=false;
         b=a.verif(a.qi,t1.getText());
-        //
-        System.out.println("Accepte le langage vide:"+a.accepteLangageVide());
-        System.out.println("Accepte le langage acceptee est fini:"+a.accepteLangageFini());
-        //
         s.append("\n");
+        s.append("Quelques information sur l'Automate");
         s.append("\n");
+        s.append("L'Automate accepte le langage vide:"+a.accepteLangageVide());
+        s.append("\n");
+        s.append("Le langage acceptee est fini:"+a.accepteLangageFini());
+        s.append("\n");
+        s.append("Etapes de Calcule :");
         s.append("\n");
         s.append(a.printCalculationSteps2());
         jTextArea2.setText(String.valueOf(s));
@@ -339,7 +341,6 @@ public class f1 extends javax.swing.JFrame {
         String Nfich="";
         JFileChooser chooser = new JFileChooser();//création dun nouveau filechosser
 	chooser.setApproveButtonText("choisir"); //intitulé du bouton
-
 	if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
     	{
 	Nfich=chooser.getSelectedFile().getPath(); //si un fichier est selectionné, récupérer le fichier puis sont path et l'afficher dans le champs de texte

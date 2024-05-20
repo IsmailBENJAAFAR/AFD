@@ -16,9 +16,6 @@ import java.io.IOException;
  */
 public class produitafd extends javax.swing.JFrame {
 
-    private String fichierAutomate1;
-    private String fichierAutomate2;
-
     /**
      * Creates new form produitafd
      */
@@ -203,11 +200,13 @@ public class produitafd extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        String Nfich="";
         JFileChooser chooser = new JFileChooser();
         int returnVal = chooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            fichierAutomate2 = chooser.getSelectedFile().getAbsolutePath();
+            Nfich=chooser.getSelectedFile().getAbsolutePath();
         }
+        jTextField3.setText(Nfich);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -221,11 +220,13 @@ public class produitafd extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        String Nfich="";
         JFileChooser chooser = new JFileChooser();
         int returnVal = chooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            fichierAutomate1 = chooser.getSelectedFile().getAbsolutePath();
+            Nfich=chooser.getSelectedFile().getAbsolutePath();
         }
+        jTextField2.setText(Nfich);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
@@ -234,24 +235,24 @@ public class produitafd extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_jButton1ActionPerformed
         if (jCheckBox1.isSelected()){
-            Automate automate1 = new Automate(fichierAutomate1);
-            Automate automate2 = new Automate(fichierAutomate2);
+            Automate automate1 = new Automate(jTextField2.getText());
+            Automate automate2 = new Automate(jTextField3.getText());
             Automate result = automate1.reunion(automate2);
         }
 
-        else if (jCheckBox2.isSelected()){
-            Automate automate1 = new Automate(fichierAutomate1);
-            Automate automate2 = new Automate(fichierAutomate2);
+        if (jCheckBox2.isSelected()){
+            Automate automate1 = new Automate(jTextField2.getText());
+            Automate automate2 = new Automate(jTextField3.getText());
             Automate result = automate1.intersection(automate2);
         }
-        else if (jCheckBox3.isSelected()){
-            Automate automate1 = new Automate(fichierAutomate1);
-            Automate automate2 = new Automate(fichierAutomate2);
+        if (jCheckBox3.isSelected()){
+            Automate automate1 = new Automate(jTextField2.getText());
+            Automate automate2 = new Automate(jTextField3.getText());
             Automate result = automate1.difference(automate2);
         }
 
-        else if (jCheckBox4.isSelected()){
-            Automate automate1 = new Automate("complementaire_"+fichierAutomate1);
+        if (jCheckBox4.isSelected()){
+            Automate automate1 = new Automate(jTextField2.getText());
             Automate result = automate1.complement();
         }
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -187,8 +187,9 @@ public class Automate{
         }
         return true;
     }
-    public boolean accepteLangageFini(){
+    public boolean accepteLangageFini() throws IOException {
         int n = q.length;
+        Automate automateTest = new Automate(this.nomfich);
         for (int i = n; i < ((2*n)-1); i++) {
             int n1 = (int) Math.pow(2,i);
             for (int j = 0; j < n1; j++) {
@@ -197,7 +198,7 @@ public class Automate{
                 for (int k = 0; k < mot.length(); k++) {
                     w.append(x[Integer.parseInt(String.valueOf(mot.charAt(k)))]);
                 }
-                if(verif(qi, String.valueOf(w))){
+                if(automateTest.verif(qi, String.valueOf(w))){
                     return false;
                 }
             }
@@ -488,7 +489,7 @@ public class Automate{
         try {
 
             // Création de l'automate complémentaire avec les mêmes paramètres que l'automate d'origine
-            Automate complementaire = new Automate("complementaire_"+this.nomfich);
+            Automate complementaire = new Automate(this.nomfich);
             // Calcul de l'ensemble des états finaux
             Set<String> etatsNonFinaux = new HashSet<>(Arrays.asList(this.q));
             etatsNonFinaux.removeAll(Arrays.asList(this.f));
@@ -506,7 +507,7 @@ public class Automate{
             }
 
             // Génération du nom du fichier pour l'automate complémentaire
-            String nomNouveauFichier = "complementaire_" + this.nomfich;
+            String nomNouveauFichier = "complementaire_Automate1";
             BufferedWriter writer = new BufferedWriter(new FileWriter(nomNouveauFichier));
 
             // Écriture des informations de l'automate complémentaire dans le fichier
@@ -548,7 +549,7 @@ public class Automate{
 
 
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         try {
             Automate a1 = new Automate("afd1.txt");
             Automate a2 = new Automate("afd2.txt");
@@ -562,6 +563,6 @@ public class Automate{
         } catch (IOException e) {
             System.out.println(e);
         }
-    }
+    }*/
 }
 
